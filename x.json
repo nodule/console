@@ -1,0 +1,90 @@
+{
+  "name": "console",
+  "description": "Console components for Chiχ",
+  "version": "0.0.3",
+  "repository": {
+    "type": "git",
+    "url": "https://repos.chix.io/rhalff/console.git"
+  },
+  "dependencies": {},
+  "nodes": [
+    {
+      "name": "error",
+      "ns": "console",
+      "description": "Console Error",
+      "async": true,
+      "phrases": {
+        "active": "Logging error to console"
+      },
+      "ports": {
+        "input": {
+          "msg": {
+            "type": "any",
+            "title": "Log message",
+            "description": "Logs an error message to the console",
+            "async": true,
+            "required": true
+          }
+        },
+        "output": {
+          "out": {
+            "type": "any",
+            "title": "Log message"
+          }
+        }
+      },
+      "fn": "on.input.msg = function() {\n  console.error($.msg);\n  output( { out: $.get('msg')});\n};\n"
+    },
+    {
+      "name": "log",
+      "ns": "console",
+      "description": "Console log",
+      "async": true,
+      "phrases": {
+        "active": "Logging to console"
+      },
+      "ports": {
+        "input": {
+          "msg": {
+            "type": "any",
+            "title": "Log message",
+            "description": "Logs a message to the console",
+            "async": true,
+            "required": true
+          }
+        },
+        "output": {
+          "out": {
+            "type": "any",
+            "title": "Log message"
+          }
+        }
+      },
+      "fn": "on.input.msg = function() {\n  console.log($.msg);\n  output( { out: $.get('msg') });\n}\n"
+    },
+    {
+      "name": "msg",
+      "ns": "console",
+      "description": "Logs a message to the console (sync version). Use this to log system messages.",
+      "phrases": {
+        "active": "{{input.msg}}"
+      },
+      "ports": {
+        "input": {
+          "msg": {
+            "type": "any",
+            "title": "Log message",
+            "required": true
+          }
+        },
+        "output": {
+          "msg": {
+            "type": "any",
+            "title": "Log Message"
+          }
+        }
+      },
+      "fn": "console.log($.msg)\noutput.msg = $.get('msg');\n"
+    }
+  ]
+}
